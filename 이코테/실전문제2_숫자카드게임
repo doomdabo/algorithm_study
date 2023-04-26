@@ -1,0 +1,12 @@
+import sys
+read = sys.stdin.readline
+
+n,m = list(map(int,read().split()))
+
+
+result = 0
+for i in range(n):
+  arr = list(map(int,read().split()))
+  min_v = min(arr) #한줄입력받아서 젤 작은수 저장
+  result = max(result,min_v) #지금까지 찾은 작은수 중 큰수를 result에 저장
+print(result)
