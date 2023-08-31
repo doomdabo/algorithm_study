@@ -1,52 +1,52 @@
-def divide(p):
+from collections import deque
+def devide(w):
     left = 0
     right = 0
-    for i in range(len(p)):
-        if p[i] == '(':
-            left+=1
+    cnt = 0
+    for i in w:
+        cnt += 1
+        if i == "(":
+            left += 1
+        elif i == ")":
+            right += 1
+        if left == right:
+            return w[:cnt],w[cnt:]
+    
+def check(u): #올바른 괄호 문자열인지 체크
+    #스택으로 구현
+    dq = deque()
+    for i in u:
+        if i == '(':
+            dq.append('(')
         else:
-            right+=1
-        if right==left: #좌괄호, 우괄호 수가 같으면
-            return p[:i+1], p[i+1:]
-            
-def correct(u):
-    stack = []
-    for p in u:
-        if p =='(':#좌괄호의 경우
-            stack.append(p)
-        else:#우괄호의 경우
-            if not stack:#스택이 비어있는 경우 짝지을 좌괄호가 없으므로 올바른 괄호 문자열이 아님
-                return False
-            #짝지을 좌괄호가 있으면 
-            stack.pop()
-    return True
-            
-        
+            if dq:
+                dq.pop()
+    if dq:
+        return False
+    else:
+        return True
 def solution(p):
-    #1단계
-    if not p: #p가 빈 문자열인 경우
+    #1
+    if not p:
         return ""
-    #2단계
-    u,v = divide(p)
-    #3단계
-    if correct(u)==True:
-        #3-1단계
-        return u+solution(v)
-    #4단계
-    if correct(u)==False:
-        #4-1단계
+    #2
+    u,v = devide(p)
+    #3
+    if check(u) == True:
+        return u + solution(v)
+    #4
+    if check(u) == False:
+        #4-1
         answer = "("
-        #4-2단계
+        #4-2
         answer += solution(v)
-        #4-3단계
+        #4-3
         answer += ")"
-        #4-4단계
-        u = u[1:len(u)-1]#첫번째, 마지막 문자 제거
-        for p in u:
-            if p =='(':
+        #4-4
+        u = u[1:len(u)-1]
+        for i in u:
+            if i == '(':
                 answer += ')'
             else:
                 answer += '('
-        #4-5단계
         return answer
-
