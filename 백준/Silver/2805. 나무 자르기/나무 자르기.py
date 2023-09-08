@@ -10,9 +10,9 @@ result = 0
 while st<end:
   mid = (st+end)//2
   sum = 0
-  for i in range(len(tree)):
-    if tree[i] > mid:
-      sum += tree[i] - mid
+  for i in tree:
+    if i > mid:
+      sum += i - mid
   if sum < m:
     end = mid
   else:
