@@ -26,6 +26,8 @@ int main(void){
 
         }
     }
+    int ans =-1;
+    int chk=0;
     while(!q.empty()){
         //큐가 비어있지 않으면 bfs시작
         pair<int,int> cur = q.front();
@@ -35,45 +37,21 @@ int main(void){
             int ny = cur.second + dy[dir];
             if(nx<0||ny<0||nx>=n||ny>=m) continue;
             if(board[nx][ny] == '1'||dist[nx][ny]!=-1) continue; 
-            // if(board[nx][ny] == '3'||board[nx][ny]=='4'||board[nx][ny]=='5'){
-            //     //만약에 음식을 찾았어?
-            //     ans = dist[cur.first][cur.second] + 1;
-            //     break; //더이상 진행할 필요 없음
-            // }
+            if(board[nx][ny] == '3'||board[nx][ny]=='4'||board[nx][ny]=='5'){
+                 ans = dist[cur.first][cur.second] + 1;
+                 chk = 1;
+                 break; //더이상 진행할 필요 없음
+             }
             q.push({nx,ny});
             dist[nx][ny] = dist[cur.first][cur.second] + 1;
         }
+        if(chk == 1) break;
     }
-    int ans[3];
-    int p = 0;
-    for(int i=0;i<n;i++){
-        for(int j=0;j<m;j++){
-            //만약 보드가 3,4,5중 하나면?
-            if(board[i][j]=='3'||board[i][j]=='4'||board[i][j]=='5'){
-                ans[p] = dist[i][j];
-                p++;
-            }
-        }
-    }
-    int cnt =0;
-    int answer;
-    for(auto a:ans){
-        if(a==-1){
-            cnt++;
-        }
-        else{
-            answer = a;
-        }
-    }
-    if(cnt==3){
+    if(ans == -1){
         cout<<"NIE";
         return 0;
     }
-    for(auto a:ans){
-        if(a!=-1){
-            answer = min(a,answer);
-        }
-    }
-    cout<<"TAK\n"<<answer;
+
+    cout<<"TAK\n"<<ans;
 
 }
