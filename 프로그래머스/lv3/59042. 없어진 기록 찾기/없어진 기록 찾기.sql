@@ -1,4 +1,4 @@
--- 코드를 입력하세요
-SELECT o.ANIMAL_ID, o.name
-from animal_ins i right join ANIMAL_OUTS o on i.animal_id = o.animal_id
-where i.animal_id is null
+SELECT O.ANIMAL_ID AS ANIMAL_ID , O.NAME AS NAME
+FROM ANIMAL_INS I RIGHT JOIN ANIMAL_OUTS O ON O.ANIMAL_ID = I.ANIMAL_ID
+WHERE I.ANIMAL_ID IS NULL
+ORDER BY O.ANIMAL_ID
