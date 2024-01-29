@@ -31,12 +31,12 @@ v2ton=dij(v2,n)
 
 r1=stov1+v1tov2+v2ton
 r2=stov2+v1tov2+v1ton
-if v1tov2>=1e9:
+# if v1tov2>=1e9:
+#   print(-1)
+# else:
+ans=min(r1,r2)
+if ans>=1e9:
   print(-1)
 else:
-  ans=min(r1,r2)
-  if ans>=1e9:
-    print(-1)
-  else:
-    print(ans)
+  print(ans)
   
